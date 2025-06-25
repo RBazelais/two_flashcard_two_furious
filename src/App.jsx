@@ -131,26 +131,55 @@ function App() {
 
 	const [reviewCards, setReviewCards] = useState(cardSet.cards);
 	const [currentCardIndex, setCurrentCardIndex] = useState(0);
-	const [ShowFront, setShowFront] = useState(true);
+	const [userInput, setUserInput] = useState("");
+	const [feedback, setFeedback] = useState("");
+	const [streak, setStreak] = useState(0);
+	const [longestStreak, setLongestStreak] = useState(0);
 
 	const handleNextCard = () => {
 		setCurrentCardIndex((prevIndex) =>
 			prevIndex >= reviewCards.length - 1 ? 0 : prevIndex + 1
 		);
-		setShowFront(true);
+		setUserInput(""); // Reset input field for the next card
+		setFeedback(""); // Reset feedback for the next card
 	};
 
 	const handlePreviousCard = () => {
 		setCurrentCardIndex((prevIndex) =>
 			prevIndex <= 0 ? reviewCards.length - 1 : prevIndex - 1
 		);
-		setShowFront(true);
+		setUserInput(""); // Reset input field for the previous card
+		setFeedback(""); // Reset feedback for the previous card
 	};
 
 	const shuffleCards = () => {
 		const shuffled = [...reviewCards].sort(() => Math.random() - 0.5);
 		setReviewCards(shuffled);
-		setShowFront(true);
+		setCurrentCardIndex(0); // Reset to the first card after shuffling
+		setUserInput(""); // Reset input field after shuffling
+		setFeedback(""); // Reset feedback after shuffling
+		setStreak(0); // Reset streak after shuffling
+	};
+
+	const handleInputChange = (e) => {
+		setUserInput(e.target.value);
+	};
+
+	const handleSubmit = () => {
+		const currentAnswer = reviewCards[currentCardIndex].answer;
+		if (userInput.trim().toLowerCase() === currentAnswer.toLowerCase()) {
+			setFeedback("correct");
+			setStreak((prevStreak) => {
+				const newStreak = prevStreak + 1;
+				if (newStreak > longestStreak) {
+					setLongestStreak(newStreak);
+				}
+				return newStreak;
+			});
+		} else {
+			setFeedback("incorrect");
+			setStreak(0); // Reset streak on incorrect answer
+		}
 	};
 
 	return (
@@ -159,6 +188,15 @@ function App() {
 				<h1>{cardSet.title}</h1>
 				<p>{cardSet.description}</p>
 				<p>Total cards: {reviewCards.length}</p>
+				<div className="streak-container">
+					<p>
+						Current Streak: <span className="streak">{streak}</span>
+					</p>
+					<p>
+						Longest Streak:{" "}
+						<span className="streak">{longestStreak}</span>
+					</p>
+				</div>
 			</header>
 
 			{reviewCards.length > 0 ? (
@@ -166,11 +204,8 @@ function App() {
 					<div className="progress-indicator">
 						Card {currentCardIndex + 1} of {reviewCards.length}
 					</div>
-					<Card
-						{...reviewCards[currentCardIndex]}
-						ShowFront={ShowFront}
-						setShowFront={setShowFront}
-					/>
+
+					<Card {...reviewCards[currentCardIndex]} />
 
 					<div className="navigation-buttons">
 						<button
@@ -180,19 +215,37 @@ function App() {
 							←
 						</button>
 						<button
-							className="arrow-button"
-							onClick={handleNextCard}
-						>
-							→
-						</button>
-
-						<button
 							className="shuffle-button"
 							onClick={shuffleCards}
 						>
 							Shuffle
 						</button>
+						<button
+							className="arrow-button"
+							onClick={handleNextCard}
+						>
+							→
+						</button>
 					</div>
+
+					<div className="answer-input">
+						<h3>Guess the answer: </h3>
+						<input
+							type="text"
+							placeholder="Type your guess"
+							value={userInput}
+							onChange={handleInputChange}
+						/>
+						<button onClick={handleSubmit}>Submit</button>
+					</div>
+
+					{feedback && (
+						<p className={`feedback ${feedback}`}>
+							{feedback === "correct"
+								? "Correct!"
+								: "Incorrect. Try again!"}
+						</p>
+					)}
 				</>
 			) : (
 				<div className="completion-message">
