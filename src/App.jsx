@@ -58,7 +58,7 @@ function App() {
 				difficulty: "Medium",
 				question:
 					"What technique is used to find pairs or triplets in a sorted array?",
-				answer: "Two-Pointer",
+				answer: "Two Pointer",
 			},
 			{
 				difficulty: "Hard",
@@ -70,7 +70,7 @@ function App() {
 				difficulty: "Medium",
 				question:
 					"What data structure is used to remove duplicates from a sorted array in place?",
-				answer: "Two-Pointer",
+				answer: "Two Pointer",
 			},
 			{
 				difficulty: "Hard",
@@ -124,7 +124,7 @@ function App() {
 				difficulty: "Hard",
 				question:
 					"What data structure is used to partition data into multiple parts?",
-				answer: "Two-Pointer",
+				answer: "Two Pointer",
 			},
 		],
 	};
@@ -168,7 +168,7 @@ function App() {
 	const handleSubmit = () => {
 		const currentAnswer = reviewCards[currentCardIndex].answer;
 		if (userInput.trim().toLowerCase() === currentAnswer.toLowerCase()) {
-			setFeedback("correct");
+			setFeedback("Correct");
 			setStreak((prevStreak) => {
 				const newStreak = prevStreak + 1;
 				if (newStreak > longestStreak) {
@@ -177,7 +177,7 @@ function App() {
 				return newStreak;
 			});
 		} else {
-			setFeedback("incorrect");
+			setFeedback("Incorrect");
 			setStreak(0);
 		}
 	};

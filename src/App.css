@@ -32,7 +32,7 @@ header {
 
 .progress-indicator {
 	margin: 10px 0;
-	color: #666;
+	color: #888;
 	font-size: 0.9em;
 }
 
@@ -90,45 +90,56 @@ button:hover {
 
 .answer-input {
 	color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 1rem;
 }
 
 .answer-input input {
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 80%;
-    margin-bottom: 0.5rem;
+	padding: 0.5rem;
+	font-size: 1rem;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	width: 80%;
+	margin-bottom: 0.5rem;
 }
 
 .answer-input button {
-    padding: 0.5rem 1rem;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
+	padding: 0.5rem 1rem;
+	background-color: #007bff;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 1rem;
 }
 
 .answer-input button:hover {
-    background-color: #0056b3;
+	background-color: #0056b3;
 }
 
 .feedback {
-    margin-top: 0.5rem;
-    font-size: 1rem;
-    font-weight: bold;
+	margin-top: 0.5rem;
+	font-size: 1rem;
+	font-weight: bold;
 }
 
 .feedback.correct {
-    color: green;
+	color: green;
 }
 
 .feedback.incorrect {
-    color: red;
+	color: red;
 }
+
+.streak-container {
+	display: flex;
+	justify-content: center;
+	gap: 2rem;
+	margin-top: 1rem;
+	color: #fff;
+	font-size: 1.2rem;
+	font-weight: bold;
+}
+
