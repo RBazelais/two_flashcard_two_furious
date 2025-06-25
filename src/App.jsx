@@ -140,25 +140,25 @@ function App() {
 		setCurrentCardIndex((prevIndex) =>
 			prevIndex >= reviewCards.length - 1 ? 0 : prevIndex + 1
 		);
-		setUserInput(""); // Reset input field for the next card
-		setFeedback(""); // Reset feedback for the next card
+		setUserInput("");
+		setFeedback("");
 	};
 
 	const handlePreviousCard = () => {
 		setCurrentCardIndex((prevIndex) =>
 			prevIndex <= 0 ? reviewCards.length - 1 : prevIndex - 1
 		);
-		setUserInput(""); // Reset input field for the previous card
-		setFeedback(""); // Reset feedback for the previous card
+		setUserInput("");
+		setFeedback("");
 	};
 
 	const shuffleCards = () => {
 		const shuffled = [...reviewCards].sort(() => Math.random() - 0.5);
 		setReviewCards(shuffled);
-		setCurrentCardIndex(0); // Reset to the first card after shuffling
-		setUserInput(""); // Reset input field after shuffling
-		setFeedback(""); // Reset feedback after shuffling
-		setStreak(0); // Reset streak after shuffling
+		setCurrentCardIndex(0);
+		setUserInput("");
+		setFeedback("");
+		setStreak(0);
 	};
 
 	const handleInputChange = (e) => {
@@ -178,7 +178,7 @@ function App() {
 			});
 		} else {
 			setFeedback("incorrect");
-			setStreak(0); // Reset streak on incorrect answer
+			setStreak(0);
 		}
 	};
 
