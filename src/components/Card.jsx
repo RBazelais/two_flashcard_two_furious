@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Card.css";
 
-const Card = ({
-	difficulty,
-	question,
-	answer,
-	onReviewChange,
-	ShowFront,
-	setShowFront,
-}) => {
+const Card = ({ difficulty, question, answer, ShowFront, setShowFront }) => {
 	const [isFlipped, setIsFlipped] = useState(false);
 
 	useEffect(() => {
@@ -59,23 +52,6 @@ const Card = ({
 						{difficulty}
 					</span>
 					<h3 className="answer">{answer}</h3>
-					<div
-						className="response-buttons"
-						onClick={(e) => e.stopPropagation()}
-					>
-						<button
-							className="unknown-button"
-							onClick={() => onReviewChange(true)}
-						>
-							Needs Review
-						</button>
-						<button
-							className="known-button"
-							onClick={() => onReviewChange(false)}
-						>
-							I Know This
-						</button>
-					</div>
 				</div>
 			</div>
 		</div>
